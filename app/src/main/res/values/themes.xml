@@ -1,0 +1,44 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+
+    <style name="MyTheme.DayNight" parent="Base.MyTheme"/>
+
+    <style name="Base.MyTheme" parent="Base.MaterialThemeBuilder">
+        <!-- Color primario -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant</item>
+        
+        <!-- Color secundario -->
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorSecondaryVariant">@color/color_secondary_variant</item>
+        
+        <!-- Color superficies y fondos -->
+        <item name="android:colorBackground">@color/color_background</item>
+        <item name="colorSurface">@color/color_surface</item>
+        <item name="colorError">@color/color_error</item>
+
+        <!-- Color encima de los colores primarios -->
+        <item name="colorOnPrimary">@color/color_on_primary</item>
+        <item name="colorOnSecondary">@color/color_on_secondary</item>
+
+        <!-- Color encima de las superficies y fondos -->
+        <item name="colorOnBackground">@color/color_on_background</item>
+        <item name="colorOnSurface">@color/color_on_surface</item>
+        <item name="colorOnError">@color/color_on_error</item>
+    </style>
+
+    <style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">?colorPrimaryVariant</item> <!-- Color de la status bar (parte arriba encima del toolbar) -->
+
+        <!-- Navigation System Bar -->
+        <item name="android:navigationBarColor">?android:colorBackground</item> <!--Color de la barra de navegacion inferior (botones de retroceso, home, etc) -->
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item> <!-- Indica que el color del texto de la barra de navegacion inferior debe ser oscuro si esta en true, claro si esta en false -->
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?colorControlHighlight</item> <!-- Indica el color del divisor de la barra de navegacion -->
+
+        <!-- Para compatibilidad con material design de versiones anteriores -->
+        <item name="colorPrimaryDark">?colorPrimaryVariant</item> <!-- Reemplazado por primary variant -->
+        <item name="colorAccent">?colorSecondary</item> <!-- Reemplazado por color secondary-->
+    </style>
+
+</resources>
