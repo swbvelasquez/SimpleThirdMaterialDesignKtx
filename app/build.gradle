@@ -38,6 +38,7 @@ android {
 
 //librerias terceros
 def glide_version = "4.13.2"
+def gson_version = "2.10.1"
 
 //librerias default
 def androidx_core_version = "1.9.0"
@@ -56,6 +57,8 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 
+    // Gson
+    implementation "com.google.code.gson:gson:$gson_version"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

@@ -16,6 +16,7 @@
         tools:targetApi="31">
         <activity
             android:name=".AddArtistActivity"
+            android:label="@string/addArtist_title"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

@@ -1,16 +1,36 @@
 package com.swbvelasquez.simplethirdmaterialdesignktx
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.swbvelasquez.simplethirdmaterialdesignktx.adapters.ArtistAdapter
 import com.swbvelasquez.simplethirdmaterialdesignktx.databinding.ActivityMainBinding
 import com.swbvelasquez.simplethirdmaterialdesignktx.entities.Artist
+import com.swbvelasquez.simplethirdmaterialdesignktx.utils.Constants
+import com.swbvelasquez.simplethirdmaterialdesignktx.utils.Functions.fromJson
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var artistList: MutableList<Artist>
     private lateinit var artistAdapter:ArtistAdapter
+
+    private val addArtistLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()){ result ->
+        if(result.resultCode == RESULT_OK){
+            val data:Intent? = result.data
+            val intentResult:String? = data?.getStringExtra(Constants.NEW_ARTIST_PARAM)
+
+            intentResult?.let {
+                val artist:Artist = it.fromJson()
+                artistList.add(artist)
+                artistAdapter.setList(artistList)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +40,26 @@ class MainActivity : AppCompatActivity() {
         populateArtistList()
         setupToolbar()
         setupRecyclerView()
+        setupButtons()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        val id = item.itemId
+        return if (id == R.id.action_settings) {
+            true
+        } else super.onOptionsItemSelected(item)
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.tbMain)
     }
 
     private fun setupRecyclerView(){
@@ -37,6 +73,18 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             setHasFixedSize(true)
         }
+    }
+
+    private fun setupButtons(){
+        binding.fabAdd.setOnClickListener {
+            launchArtistActivity()
+        }
+    }
+
+    private fun launchArtistActivity(){
+        val intent = Intent(this,AddArtistActivity::class.java)
+        intent.putExtra(Constants.NEW_ID_ARTIST_PARAM,artistList.size + 1)
+        addArtistLauncher.launch(intent)
     }
 
     private fun populateArtistList() {

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SimpleThirdMaterialDesignKtx</string>
-
+    <string name="content_description">Content</string>
     <string name="action_settings">Settings</string>
 
     <string name="label_dialog_add">Añadir</string>
@@ -31,4 +31,5 @@
     <string name="main_dialogDelete_message">¿Estas seguro de que deseas eliminar a %s?\nSe eliminará permanentemente.</string>
     <string name="main_message_delete_success">Artista eliminado correctamente.</string>
     <string name="main_message_delete_fail">El artista no ha sido eliminado correctamente.</string>
+    <string name="addArtist_title">Añadir Artista</string>
 </resources>
