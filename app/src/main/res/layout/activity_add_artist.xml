@@ -75,29 +75,42 @@
             </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilFirstName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:helperText="@string/addArtist_help_required"
+                app:startIconDrawable="@drawable/ic_person"
+                style="@style/MyTheme.DayNight.TextInputLayout">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etNombre"
+                    android:id="@+id/etFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/artist_hint_nombre"
                     android:inputType="textPersonName|textCapWords"
+                    android:nextFocusForward="@id/etLastName"
                     android:maxLength="@integer/nombre_maxLenght"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilLastName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:helperText="@string/addArtist_help_required"
+                app:startIconDrawable="@drawable/ic_person"
+                style="@style/MyTheme.DayNight.TextInputLayout">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etApellidos"
+                    android:id="@+id/etLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/artist_hint_apellidos"
                     android:inputType="textPersonName|textCapWords"
                     android:maxLength="@integer/nombre_maxLenght"
                     android:imeOptions="actionNext"
-                    android:nextFocusForward="@id/etEstatura"/>
+                    android:nextFocusForward="@id/etHeight"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -107,54 +120,77 @@
                 android:baselineAligned="false">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilBirthDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50">
+                    app:startIconDrawable="@drawable/ic_calendar"
+                    android:layout_weight="50"
+                    android:layout_marginEnd="@dimen/common_padding_min"
+                    style="@style/MyTheme.DayNight.TextInputLayout">
+
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etFechaNacimiento"
+                        android:id="@+id/etBirthDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/artist_hint_fechaNacimiento"
                         android:focusableInTouchMode="false"/>
+
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilHeight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50">
+                    android:layout_weight="50"
+                    android:layout_marginStart="@dimen/common_padding_min"
+                    app:helperText="@string/addArtist_help_min_height"
+                    app:startIconDrawable="@drawable/ic_person"
+                    style="@style/MyTheme.DayNight.TextInputLayout">
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etEstatura"
+
+                        android:id="@+id/etHeight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/artist_hint_estatura"
                         android:inputType="number"
                         android:maxLength="@integer/estatura_maxLenght"/>
+
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilBirthPlace"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_place"
+                style="@style/MyTheme.DayNight.TextInputLayout">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etLugarNacimiento"
+                    android:id="@+id/etBirthPlace"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/artist_hint_lugarNacimiento"
                     android:inputType="textAutoComplete"
                     android:maxLength="@integer/lugarNacimiento_maxLenght"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNotes"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/item_padding_vertical"
+                style="@style/MyTheme.DayNight.TextInputLayout">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etNotas"
+                    android:id="@+id/etNotes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="@string/artist_hint_notas"
                     android:gravity="top|start"
                     android:inputType="textMultiLine"
                     android:maxLength="@integer/notas_maxLenght"/>
+
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
