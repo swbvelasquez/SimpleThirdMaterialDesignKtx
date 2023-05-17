@@ -21,15 +21,31 @@ class ArtistAdapter(private var artistList : MutableList<Artist>,
         return artistList.size
     }
 
-    fun setList(list: MutableList<Artist>) {
-        artistList = list
-        notifyDataSetChanged()
+    fun add(artist:Artist){
+        artistList.add(artist)
+        notifyItemInserted(artistList.size)
+    }
+
+    fun edit(artist: Artist){
+        val position = artistList.indexOf(artist)
+
+        if(position!=-1){
+            artistList[position] = artist
+            notifyItemChanged(position)
+        }
     }
 
     fun remove(artist: Artist) {
-        if (artistList.contains(artist)) {
+        val position = artistList.indexOf(artist)
+
+        if (position!=-1) {
             artistList.remove(artist)
-            notifyDataSetChanged()
+            notifyItemRemoved(position)
         }
+    }
+
+    fun setList(list: MutableList<Artist>) {
+        artistList = list
+        notifyDataSetChanged()
     }
 }

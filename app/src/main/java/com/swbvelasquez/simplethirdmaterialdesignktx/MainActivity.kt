@@ -12,6 +12,7 @@ import com.swbvelasquez.simplethirdmaterialdesignktx.databinding.ActivityMainBin
 import com.swbvelasquez.simplethirdmaterialdesignktx.entities.Artist
 import com.swbvelasquez.simplethirdmaterialdesignktx.utils.Constants
 import com.swbvelasquez.simplethirdmaterialdesignktx.utils.Functions.fromJson
+import com.swbvelasquez.simplethirdmaterialdesignktx.utils.Functions.toJson
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -22,12 +23,24 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()){ result ->
         if(result.resultCode == RESULT_OK){
             val data:Intent? = result.data
-            val intentResult:String? = data?.getStringExtra(Constants.NEW_ARTIST_PARAM)
+            val intentResult:String? = data?.getStringExtra(Constants.ARTIST_PARAM)
 
             intentResult?.let {
                 val artist:Artist = it.fromJson()
-                artistList.add(artist)
-                artistAdapter.setList(artistList)
+                artistAdapter.add(artist)
+            }
+        }
+    }
+
+    private val detailArtistLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()){ result ->
+        if(result.resultCode == RESULT_OK){
+            val data:Intent? = result.data
+            val intentResult:String? = data?.getStringExtra(Constants.ARTIST_PARAM)
+
+            intentResult?.let {
+                val artist:Artist = it.fromJson()
+                artistAdapter.edit(artist)
             }
         }
     }
@@ -64,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView(){
         artistAdapter = ArtistAdapter(artistList,
-            onClickListener =  { artist -> artist.id },
+            onClickListener =  { artist -> launchDetailActivity(artist) },
             onLongClickListener =  { artist -> artist.id }
         )
 
@@ -85,6 +98,12 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this,AddArtistActivity::class.java)
         intent.putExtra(Constants.NEW_ID_ARTIST_PARAM,artistList.size + 1)
         addArtistLauncher.launch(intent)
+    }
+
+    private fun launchDetailActivity(artist:Artist){
+        val intent = Intent(this,DetailActivity::class.java)
+        intent.putExtra(Constants.ARTIST_PARAM,artist.toJson())
+        detailArtistLauncher.launch(intent)
     }
 
     private fun populateArtistList() {

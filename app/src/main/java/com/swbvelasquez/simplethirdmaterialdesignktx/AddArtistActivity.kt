@@ -66,13 +66,14 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
 
     private fun setupCalendar() {
         mCalendar = Calendar.getInstance(Locale.ROOT)
+        birthDayArtist = System.currentTimeMillis()
         binding.etBirthDate.setText(SimpleDateFormat("dd/MM/yyyy", Locale.ROOT).format(System.currentTimeMillis()))
         binding.etBirthDate.setOnClickListener {
             val datePicker = DateSelectorDialog()
             datePicker.setListener(this@AddArtistActivity)
 
             val args = Bundle()
-            args.putLong(DateSelectorDialog.SELECTED_DATE, System.currentTimeMillis())
+            args.putLong(DateSelectorDialog.DATE_PARAM, birthDayArtist)
 
             datePicker.arguments = args
             datePicker.show(supportFragmentManager, DateSelectorDialog.SELECTED_DATE)
@@ -132,7 +133,7 @@ class AddArtistActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListene
             }
 
             val resultIntent = Intent()
-            resultIntent.putExtra(Constants.NEW_ARTIST_PARAM, artist.toJson())
+            resultIntent.putExtra(Constants.ARTIST_PARAM, artist.toJson())
             setResult(RESULT_OK, resultIntent)
             finish()
         }

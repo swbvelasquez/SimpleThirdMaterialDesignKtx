@@ -2,14 +2,14 @@ package com.swbvelasquez.simplethirdmaterialdesignktx.entities
 
 data class Artist(
     var id:Long=0,
-    val firstName:String,
-    val lastName:String,
-    val birthDate:Long=0,
-    val birthPlace:String,
-    val height:Int,
-    val notes:String,
+    var firstName:String,
+    var lastName:String,
+    var birthDate:Long=0,
+    var birthPlace:String,
+    var height:Int,
+    var notes:String,
     var order:Int=0,
-    val photoUrl:String="",
+    var photoUrl:String="",
 ){
     val fullName: String
         get() = "$firstName $lastName"
