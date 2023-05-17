@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.swbvelasquez.simplethirdmaterialdesignktx.adapters.ArtistAdapter
 import com.swbvelasquez.simplethirdmaterialdesignktx.databinding.ActivityMainBinding
@@ -62,13 +63,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-        return if (id == R.id.action_settings) {
-            true
-        } else super.onOptionsItemSelected(item)
+        //Para cambiar de tema de claro a oscuro
+        when(item.itemId){
+            R.id.action_light_theme -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            R.id.action_dark_theme -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupToolbar() {
