@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white_t">#88ffffff</color>
+
+    <!--Material Theme Colors-->
+    <color name="color_primary">#f8bbd0</color> <!-- Se utiliza principalmente en la barra de aplicaciones y como color de fondo en varios componentes -->
+    <color name="color_primary_variant">#c48b9f</color> <!-- Se utiliza para proporcionar sombras y efectos de profundidad -->
+    <color name="color_secondary">#ff9100</color> <!-- Se utiliza para resaltar elementos importantes de la interfaz de usuario, como los botones de acción y los iconos -->
+    <color name="color_secondary_variant">#c56200</color> <!-- se utiliza para proporcionar sombras y efectos de profundidad -->
+
+    <color name="color_background">#000000</color> <!-- Afecta al color de fondo de los componentes -->
+    <color name="color_surface">#212121</color> <!-- Afecta a las superficies como cards, opciones del menu -->
+    <color name="color_error">#ff8a80</color> <!-- Afecta a los mensajes de error -->
+
+    <color name="color_on_primary">#000000</color> <!-- Se ve encima del color primario -->
+    <color name="color_on_secondary">#000000</color> <!-- Se ve encima del color secundario -->
+    <color name="color_on_background">#ffffff</color> <!-- Se ve encima del color background -->
+    <color name="color_on_surface">#ffffff</color> <!-- Se ve encima del color surface -->
+    <color name="color_on_error">#000000</color>
+    <color name="color_divider">#1E000000</color> <!-- Se ve encima del color error -->
+</resources>
