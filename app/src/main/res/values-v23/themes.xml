@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Para compatibilidad con versiones requeridas, en este caso no era necesario pasar este atributo porque el minSdk es 24 -->
-    <style name="MyTheme.DayNight" parent="Base.MyTheme">
-        <item name="android:windowLightStatusBar">true</item> <!-- Indica que el color del texto de la status bar debe ser oscuro si esta en true, claro si esta en false -->
-    </style>
-</resources>

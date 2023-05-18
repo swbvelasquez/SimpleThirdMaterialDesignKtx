@@ -35,6 +35,7 @@
     <style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Status Bar -->
         <item name="android:statusBarColor">?colorPrimaryVariant</item> <!-- Color de la status bar (parte arriba encima del toolbar) -->
+        <item name="android:windowLightStatusBar">true</item> <!-- Indica que el color del texto de la status bar debe ser oscuro si esta en true, claro si esta en false -->
 
         <!-- Navigation System Bar -->
         <item name="android:navigationBarColor">?android:colorBackground</item> <!--Color de la barra de navegacion inferior (botones de retroceso, home, etc) -->
