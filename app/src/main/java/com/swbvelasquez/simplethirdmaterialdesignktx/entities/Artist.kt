@@ -21,14 +21,6 @@ data class Artist(
         other as Artist
 
         if (id != other.id) return false
-        if (firstName != other.firstName) return false
-        if (lastName != other.lastName) return false
-        if (birthDate != other.birthDate) return false
-        if (birthPlace != other.birthPlace) return false
-        if (height != other.height) return false
-        if (notes != other.notes) return false
-        if (order != other.order) return false
-        if (photoUrl != other.photoUrl) return false
 
         return true
     }

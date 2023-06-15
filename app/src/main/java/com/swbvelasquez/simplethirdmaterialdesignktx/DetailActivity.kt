@@ -7,8 +7,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.DatePicker
+import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.swbvelasquez.simplethirdmaterialdesignktx.databinding.ActivityDetailBinding
 import com.swbvelasquez.simplethirdmaterialdesignktx.dialogs.DateSelectorDialog
 import com.swbvelasquez.simplethirdmaterialdesignktx.entities.Artist
@@ -26,6 +30,14 @@ class DetailActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private var mMenuItem: MenuItem? = null
     private var mIsEdit = false
     private var birthDayArtist:Long=0
+    private var lastPhotoUrl:String?=null
+
+    private val openGalleryLauncher = registerForActivityResult(
+        ActivityResultContracts.GetContent()){ result ->
+        if(result != null){
+            setImageFromUrl(result.toString())
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,6 +113,16 @@ class DetailActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     }
 
     private fun setupButtons(){
+        binding.imvFromUrl.setOnClickListener {
+            showInputUrlDialog()
+        }
+        binding.imvFromGallery.setOnClickListener {
+            showGallery()
+        }
+        binding.imvDeletePhoto.setOnClickListener {
+            showDeletePhotoDialog()
+        }
+
         binding.fabSave.setOnClickListener {
             if(mIsEdit){
                 if(validateFields()) {
@@ -213,11 +235,55 @@ class DetailActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
             artist.birthPlace = etBirthPlace.text.toString().trim()
             artist.height = etHeight.text.toString().trim().toInt()
             artist.notes = etNotes.text.toString().trim()
+            lastPhotoUrl?.let { artist.photoUrl=it }
 
             val resultIntent = Intent()
             resultIntent.putExtra(Constants.ARTIST_PARAM, artist.toJson())
             setResult(RESULT_OK, resultIntent)
             finish()
         }
+    }
+
+    private fun showInputUrlDialog(){
+        val etPhotoUrl = EditText(this)
+        val builder = MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.addArtist_dialogUrl_title)
+            .setPositiveButton(R.string.label_dialog_add) { _, _ ->
+                setImageFromUrl(etPhotoUrl.text.toString().trim { it <= ' ' })
+            }
+            .setNegativeButton(R.string.label_dialog_cancel, null)
+        builder.setView(etPhotoUrl)
+        builder.show()
+    }
+
+    private fun showDeletePhotoDialog(){
+        val builder = MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.detalle_dialogDelete_title)
+            .setMessage(String.format(Locale.ROOT,
+                getString(R.string.detalle_dialogDelete_message)," este artista"))
+            .setPositiveButton(R.string.label_dialog_delete) { _, _ ->
+                setImageFromUrl(null)
+            }
+            .setNegativeButton(R.string.label_dialog_cancel, null)
+        builder.show()
+    }
+
+    private fun showGallery(){
+        openGalleryLauncher.launch("image/*")
+    }
+
+    private fun setImageFromUrl(url:String?){
+        if(url!=null){
+            Glide
+                .with(this)
+                .load(url)
+                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.ic_sentiment_satisfied)
+                .into(binding.imvPhoto)
+        }else{
+            binding.imvPhoto.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_photo_size_select_actual))
+        }
+        lastPhotoUrl = url
     }
 }

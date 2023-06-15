@@ -8,12 +8,15 @@ import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.swbvelasquez.simplethirdmaterialdesignktx.adapters.ArtistAdapter
 import com.swbvelasquez.simplethirdmaterialdesignktx.databinding.ActivityMainBinding
 import com.swbvelasquez.simplethirdmaterialdesignktx.entities.Artist
 import com.swbvelasquez.simplethirdmaterialdesignktx.utils.Constants
+import com.swbvelasquez.simplethirdmaterialdesignktx.utils.Functions
 import com.swbvelasquez.simplethirdmaterialdesignktx.utils.Functions.fromJson
 import com.swbvelasquez.simplethirdmaterialdesignktx.utils.Functions.toJson
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -82,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView(){
         artistAdapter = ArtistAdapter(artistList,
             onClickListener =  { artist -> launchDetailActivity(artist) },
-            onLongClickListener =  { artist -> artist.id }
+            onLongClickListener =  { artist -> deleteArtist(artist) }
         )
 
         binding.lyContentMain.rvArtist.apply {
@@ -146,5 +149,23 @@ class MainActivity : AppCompatActivity() {
                     height = heights[i], notes = notes[i], order = i + 1, photoUrl = pictures[i])
             )
         }
+    }
+
+    private fun deleteArtist(artist: Artist){
+        val builder = MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.main_dialogDelete_title)
+            .setMessage(String.format(Locale.ROOT, getString(R.string.main_dialogDelete_message),artist.fullName))
+            .setPositiveButton(R.string.label_dialog_delete) { _, _ ->
+                try {
+                    artistAdapter.remove(artist)
+                    Functions.showMessage(this,R.string.main_message_delete_success)
+
+                } catch (ex: Exception) {
+                    Functions.showMessage(this,R.string.main_message_delete_fail)
+                    ex.printStackTrace()
+                }
+            }
+            .setNegativeButton(R.string.label_dialog_cancel, null)
+        builder.show()
     }
 }

@@ -45,7 +45,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/app_bar_height"
                     android:src="@drawable/ic_photo_size_select_actual"
-                    app:tint="@color/color_on_background"
                     android:contentDescription="@string/content_description" />
 
                 <LinearLayout

@@ -38,22 +38,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_marginTop="?attr/actionBarSize">
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                    <ImageView
                         style="@style/AppTheme.ImageViewButton"
-                        android:id="@+id/imgDeleteFoto"
-                        android:src="@drawable/ic_close_box"/>
-                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imvDeletePhoto"
+                        android:src="@drawable/ic_close_box"
+                        android:contentDescription="@string/content_description"/>
+                    <ImageView
                         style="@style/AppTheme.ImageViewButton"
-                        android:id="@+id/imgFromGallery"
-                        android:src="@drawable/ic_image"/>
-                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imvFromGallery"
+                        android:src="@drawable/ic_image"
+                        android:contentDescription="@string/content_description"/>
+                    <ImageView
                         style="@style/AppTheme.ImageViewButton"
-                        android:id="@+id/imgFromUrl"
-                        android:src="@drawable/ic_earth_box"/>
+                        android:id="@+id/imvFromUrl"
+                        android:src="@drawable/ic_earth_box"
+                        android:contentDescription="@string/content_description"/>
+
                 </LinearLayout>
+
             </FrameLayout>
 
             <androidx.appcompat.widget.Toolbar
